@@ -1,22 +1,45 @@
-<%@ page language="java" contentType="text/html; charset=windows-1256"
-pageEncoding="windows-1256" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-"http://www.w3.org/TR/html4/loose.dtd">
-<html><head>
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1256">
-<title>Liste Employees</title>
-</head><body><h1> All Employees</h1>
-<table >
-<tr><th>ID</th><th>Name</th><th>Email</th><th>JobTitle</th><th>phoneNumber</th></tr>
-<c:forEach items="${employees}" var="e">
-<tr>
-<td>${e.id }</td>
-<td>${e.name }</td>
-<td>${e.email }</td>
-<td>${e.jobTitle }</td>
-<td>${e.phone }</td>
-</tr>
-</c:forEach>
-</table></body></html>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Liste des employés</title>
+</head>
+<body>
+    <h1>Liste des employés</h1>
+   <form action="/find" method="get">
+  <label for="searchId">Rechercher un employé par ID : </label>
+  <input type="text" id="searchId" name="id">
+  <button type="submit">Rechercher</button>
+</form>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Email</th>
+            <th>jobTitle</th>
+            <th>phone</th>
+            <th>Actions</th>
+        </tr>
+        <c:forEach var="employee" items="${employees}">
+            <tr>
+                <td>${employee.id}</td>
+                <td>${employee.name}</td>
+                <td>${employee.email}</td>
+                <td>${employee.jobTitle}</td>
+                <td>${employee.phone}</td>
+                <td>
+              
+                    <a href="edit/${employee.id}">Editer</a>
+                    <a href="delete/${employee.id}">Supprimer</a>
+                </td>
+            </tr>
+        </c:forEach>
+    </table>
+    <br>
+    <a href="register">Ajouter un employé</a>
+</body>
+</html>
